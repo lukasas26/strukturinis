@@ -30,9 +30,6 @@ int main()
         }
 
         switch(pasirinkimas){
-            case 0: {
-                break;
-            }
             case 1: {
 
                 cout << "------ Valiutos palyginimas ----" << endl;
