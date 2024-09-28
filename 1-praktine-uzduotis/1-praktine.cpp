@@ -1,5 +1,4 @@
 #include <iostream>
-#include <cmath>
 #include <iomanip>
 
 using namespace std;
@@ -8,6 +7,8 @@ int main()
 {
 
     int pasirinkimas = 0;
+    float kiekis = 0;
+    float total;
 
     float gbp_bendras = 0.8593, gbp_pirkti = 0.8450, gbp_parduoti = 0.9060;
     float usd_bendras = 1.0713, usd_pirkti = 1.0547, usd_parduoti = 1.1309;
@@ -23,18 +24,115 @@ int main()
 
         cin >> pasirinkimas;
 
+        if (cin.fail()) {
+            cout << "[CIN --> Pasirinkimas] Klaida: Ivestas ne skaicius" << endl;
+
+            break;
+
+        }
+
 
         switch(pasirinkimas){
             case 1: {
 
-                cout << "----- Valiutu kursai --------" << endl;
-                cout << "1 EUR - " << fixed << setprecision(2) << gbp_bendras <<  " GBP" << endl;
-                cout << "1 EUR - " << fixed << setprecision(2) << usd_bendras << " USD" <<  endl;
-                cout << "1 EUR - " << fixed << setprecision(2) << inr_bendras << " INR" << endl << endl;
-                break;
+                cout << "------ Valiutos palyginimas ----" << endl;
+                cout << "Iveskite, kokios valiutos norite:" << endl;
+
+                cout << "1. GBP" << endl;
+                cout << "2. USD" << endl;
+                cout << "3. INR" << endl;
+                cout << "Kitas skaicius - iseiti" << endl;
+
+                cin >> pasirinkimas;
+
+                cout << "Iveskite, kiek valiutos norite (eurais):" << endl;
+                cin >> kiekis;
+
+                if (cin.fail()) {
+                    cout << "[CIN --> Pasirinkimas] Klaida: Ivestas ne skaicius" << endl;
+
+                    break;
+
+                }
+
+
+                if (pasirinkimas == 1)
+                {
+                    total = gbp_bendras * kiekis;
+
+                    cout << kiekis << " EUR " << fixed << setprecision(2) << "---> " << total << " GBP" << endl;
+                    break;
+                }
+                else if (pasirinkimas == 2)
+                {
+                    total = gbp_bendras * kiekis;
+
+                    cout << kiekis << " EUR " << fixed << setprecision(2) << "---> " << total << " USD" << endl;
+                    break;
+                }
+                else if (pasirinkimas == 3)
+                {
+                    total = gbp_bendras * kiekis;
+
+                    cout << kiekis << " EUR " << fixed << setprecision(2) << "---> " << total << " INR" << endl;
+                    break;
+                }
+                else
+                {
+                    break;
+                }
 
 
             }
+            case 2: {
+                cout << "------ Valiutos pirkimas ----" << endl;
+                cout << "Iveskite, kokios valiutos norite:" << endl;
+
+                cout << "1. GBP" << endl;
+                cout << "2. USD" << endl;
+                cout << "3. INR" << endl;
+                cout << "Kitas skaicius - iseiti" << endl;
+
+                cin >> pasirinkimas;
+
+                cout << "Iveskite, kiek valiutos norite:" << endl;
+                cin >> kiekis;
+
+                if (cin.fail()) {
+                    cout << "[CIN --> Pasirinkimas] Klaida: Ivestas ne skaicius" << endl;
+
+                    break;
+                }
+
+
+                if (pasirinkimas == 1)
+                {
+                    total = kiekis/gbp_pirkti;
+
+                    cout << "Jus gausite "<<fixed << setprecision(2) << total << " EUR uz " <<kiekis << " GBP" << endl;
+                    break;
+                }
+                else if (pasirinkimas == 2)
+                {
+                    total = kiekis/gbp_pirkti;
+
+                    cout << "Jus gausite "<<fixed << setprecision(2) << total << " EUR uz " <<kiekis << " USD" << endl;
+                    break;
+                }
+                else if (pasirinkimas == 3) {
+                    total = kiekis/gbp_pirkti;
+
+                    cout << "Jus gausite "<<fixed << setprecision(2) << total << " EUR uz " <<kiekis << " INR" << endl;
+                    break;
+                }
+                else
+                {
+                    break;
+                }
+
+
+            }
+
             default:
                 break;
 
