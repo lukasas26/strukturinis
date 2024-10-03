@@ -6,8 +6,8 @@ int KvadratoSuskaiciuotiPerimetra(float krastine) {
     return 4*krastine;
 }
 
-void suskaiciuotiPlota(int krastine, int* plotas) {
-    *plotas = krastine * krastine;
+void suskaiciuotiPlota(int krastine, int& plotas) {
+    plotas = krastine * krastine;
 }
 
 double celsiusToFahrenheit(double tempCelcius) {
@@ -28,7 +28,7 @@ int main() {
     cout << "Iveskite kvadrato krastine: ";
     cin >> krastine;
 
-    suskaiciuotiPlota(krastine, &plotas);
+    suskaiciuotiPlota(krastine, plotas);
 
     cout << "Kvadrato plotas: " << plotas << endl;
 
