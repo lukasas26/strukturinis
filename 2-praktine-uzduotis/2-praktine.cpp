@@ -60,11 +60,32 @@ void zaidimas() {
 
 }
 
-void funkcija4() {
-    cout << "Cia funkcija 4" << endl;
+void fizzbuzz(int n) {
+    for (int i = 1; i <= n; i++) {
+        {
+            if ((i % 3 == 0) && (i % 5 == 0)) {
+                cout << i << endl;
+                cout << "FizzBuzz" << endl;
+
+            }
+            else if (i % 3 == 0) {
+                cout << i << endl;
+                cout << "Fizz" << endl;
+            }
+            else if (i % 5 == 0) {
+                cout << i << endl;
+                cout << "Buzz" << endl;
+            }
+            else {
+                cout << i << endl;
+            }
+
+        }
+    }
 }
 
-int main() {
+
+int main(){
 
     int pasirinkimas;
 
@@ -73,10 +94,9 @@ int main() {
         cout << "1. Balsiu tikrinimas" << endl;
         cout << "2. Maziausias / didziausias bendras daliklis" << endl;
         cout << "3. Zaidimas 'Atspek Skaiciu'" << endl;
-        cout << "4. Funkcija 4" << endl;
+        cout << "4. FizzBuzz" << endl;
         cout << "9. Iseiti is programos" << endl;
-
-        cout << "Iveskite pasirinkima (1-5): ";
+        cout << "Iveskite pasirinkima (1-4): ";
         cin >> pasirinkimas;
 
         switch (pasirinkimas) {
@@ -88,14 +108,14 @@ int main() {
                 break;
             }
             case 2: {
-                int pirmas, antras, dbd, mbd;
+                int pirmas, antras;
                 cout << "Iveskite pirma skaiciu: " << endl;
                 cin >> pirmas;
                 cout << "Iveskite antra skaiciu: " << endl;
                 cin >> antras;
 
-                dbd = EuklidoAlgoritmas(pirmas, antras);
-                mbd = MaziausiasBendrasDaliklis(pirmas, antras);
+                int dbd = EuklidoAlgoritmas(pirmas, antras);
+                int mbd = MaziausiasBendrasDaliklis(pirmas, antras);
 
                 cout << "Maziausias bendras daliklis " << pirmas << " ir " << antras << " yra: " << mbd << endl;
                 cout << "Didziausias bendras daliklis " << pirmas << " ir " << antras << " yra: " << dbd << endl;
@@ -107,7 +127,11 @@ int main() {
                 break;
             }
             case 4: {
-                funkcija4();
+                int skaicius;
+                cout << "----- FizzBuzz -----" << endl;
+                cout << "Paisirinkite sekos skaiciu (iki): " << endl;
+                cin >> skaicius;
+                fizzbuzz(skaicius);
                 break;
             }
             case 9: {
