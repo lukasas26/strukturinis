@@ -28,8 +28,36 @@ int MaziausiasBendrasDaliklis(int skaicius1, int skaicius2) {
     return (skaicius1 * skaicius2) / EuklidoAlgoritmas(skaicius1, skaicius2);
 }
 
-void funkcija3() {
-    cout << "Cia funkcija 3" << endl;
+int RandomNum(int nuo, int iki) {
+    return rand() % iki + nuo;
+}
+
+
+void zaidimas() {
+    int pasirinkimas = RandomNum(1, 100);
+
+    cout << pasirinkimas << endl;
+
+    cout << "------------- [ATSPEK SKAICIU] -------------------" << endl;
+    cout << "Atspekite skaiciu nuo 1 iki 100, kuri sugalvojo kompiuteris:" << endl;
+
+    while (true) {
+
+        int spejimas;
+        cin >> spejimas;
+
+        if (pasirinkimas != spejimas) {
+            if (pasirinkimas < spejimas) {
+                cout << "Pamegink dar karta! Skaicius buvo mazesnis." << endl;
+            } else if (pasirinkimas > spejimas) {
+                cout << "Pamegink dar karta! Skaicius buvo didesnis." << endl;
+            }
+        } else {
+            cout << "Valio! Skaicius buvo " << spejimas << " ." << endl;
+            break;
+        }
+    }
+
 }
 
 void funkcija4() {
@@ -44,7 +72,7 @@ int main() {
         cout << "\nPasirinkite viena is siu funkciju:" << endl;
         cout << "1. Balsiu tikrinimas" << endl;
         cout << "2. Maziausias / didziausias bendras daliklis" << endl;
-        cout << "3. Funkcija 3" << endl;
+        cout << "3. Zaidimas 'Atspek Skaiciu'" << endl;
         cout << "4. Funkcija 4" << endl;
         cout << "9. Iseiti is programos" << endl;
 
@@ -75,7 +103,7 @@ int main() {
                 break;
             }
             case 3: {
-                funkcija3();
+                zaidimas();
                 break;
             }
             case 4: {
