@@ -36,8 +36,6 @@ int RandomNum(int nuo, int iki) {
 void zaidimas() {
     int pasirinkimas = RandomNum(1, 100);
 
-    cout << pasirinkimas << endl;
-
     cout << "------------- [ATSPEK SKAICIU] -------------------" << endl;
     cout << "Atspekite skaiciu nuo 1 iki 100, kuri sugalvojo kompiuteris:" << endl;
 
