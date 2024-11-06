@@ -69,15 +69,37 @@ void sifruoti(const char pirmas[], const char raktas[], char final[], const int 
         cout << final[xz];
 }
 
+void issifruoti(char pirmas[], char raktas[], const int n, const int masyvas_strlen, const int koduote) {
+    for (int i = 0; i < masyvas_strlen; i++) {
+        int X = 0, Y = 0;
 
+        // Rasti pozicijas LT_RAIDYNAS arba ASCII_RAIDYNAS pagal koduotæ
+        for (int j = 0; j < n; j++) {
+            if (koduote == 1) {  // Naudojame LT abëcëlæ
+                if (LT_RAIDYNAS[j] == pirmas[i]) X = j;
+                if (LT_RAIDYNAS[j] == raktas[i]) Y = j;
+            } else if (koduote == 2) {  // Naudojame ASCII koduotæ
+                if (ASCII_RAIDYNAS[j] == pirmas[i]) X = j;
+                if (ASCII_RAIDYNAS[j] == raktas[i]) Y = j;
+            }
+        }
 
-void test3() {
-    cout << "Cia bus 3" << endl;
+        // Pritaikome Vigen?re deðifravimo formulæ
+        int finalinis = (X - Y + n) % n;
+
+        if (koduote == 1) {
+            pirmas[i] = LT_RAIDYNAS[finalinis];
+        } else if (koduote == 2) {
+            pirmas[i] = ASCII_RAIDYNAS[finalinis];
+        }
+    }
+
+    cout << "Deðifruotas þodis: ";
+    for (int zx = 0; zx < masyvas_strlen; zx++)
+        cout << pirmas[zx];
 }
 
-void test4() {
-    cout << "Cia bus 4" << endl;
-}
+
 
 int main() {
 
@@ -155,17 +177,54 @@ int main() {
                 }
             }
             case 2: {
-                cout << "-- Deðifravimas --" << endl;
+                cout << "-- Desifravimas (issifravimas) --" << endl;
                 cout << "1 - LT abecelë\n2 - ASCII koduotë\nPasirinkite: ";
 
                 int vidinis;
                 cin >> vidinis;
-                if (vidinis == 1) {
+                if ((vidinis == 1) || (vidinis == 2)) {
 
-//
-                }
-                else if(vidinis == 2) {
-                    test4();
+                    char pirmas[50] = {0};
+                    char raktas[50] = {0};
+
+
+                    cout << "Iveskite teksta:\n ÁVEDIMAS: ";
+
+                    cin >> pirmas;
+
+
+                    if (vidinis != 2) {
+                        for(int xy = 0; xy < strlen(pirmas); xy++)
+                            pirmas[xy] = toupper(pirmas[xy]); // didziosios raides
+                    }
+
+                    cout << "Iveskite rakta:\nÁVEDIMAS: ";
+
+                    cin >> raktas;
+
+                    if (vidinis != 2) {
+                        for(int zx = 0; zx < strlen(raktas); zx++)
+                            raktas[zx] = toupper(raktas[zx]);
+                    }
+
+                    if (strlen(raktas) < strlen(pirmas)) {
+                        int ilgis = strlen(raktas);
+                        for (int i = ilgis; i < strlen(pirmas); i++) {
+                            raktas[i] = raktas[i % ilgis];
+                        }
+                        raktas[strlen(pirmas)] = '\0';
+                    }
+
+                    if(vidinis == 1) {
+                        int n = sizeof(LT_RAIDYNAS) / sizeof(LT_RAIDYNAS[0]);
+                        issifruoti(pirmas, raktas, n, strlen(pirmas), 1);
+                        break;
+                    }
+                    else if (vidinis == 2) {
+                        int n = sizeof(ASCII_RAIDYNAS) / sizeof(ASCII_RAIDYNAS[0]);
+                        issifruoti(pirmas, raktas, n, strlen(pirmas), 2);
+                        break;
+                    }
                 }
                 else {
                     return 0;
@@ -178,7 +237,6 @@ int main() {
         }
 
     }
-
 
     return 0;
 }
