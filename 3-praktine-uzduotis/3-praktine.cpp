@@ -19,26 +19,38 @@ char ASCII_RAIDYNAS[93] =
     '~'
 };
 
-void sifruoti(const char pirmas[], const char antras[], char final[], const int n, const int masyvas_strlen, const int koduote){ // MasyvoIlgis 30.
+void sifruoti(const char pirmas[], const char raktas[], char final[], const int n, const int masyvas_strlen, const int koduote) {
+
     for(int i = 0; i < masyvas_strlen; i++){
 
         int X = 0, Y = 0; // sifravimo rakto pozicija
 
-         for(int j = 0; j < n; j++){
-             switch(koduote){
-                 case 1: {
-                     if(LT_RAIDYNAS[j] == pirmas[i]) {
-                         X = j;
-                     }
-                     if(LT_RAIDYNAS[j] == antras[i]) {
-                         Y = j;
-                     }
+        for(int j = 0; j < n; j++){
+            switch(koduote){
+                case 1: {
+                    if(LT_RAIDYNAS[j] == pirmas[i]) {
+                        X = j;
+                    }
+                    if(LT_RAIDYNAS[j] == raktas[i]) {
+                        Y = j;
+                    }
 
-                     break;
-                 }
+                    break;
+                }
+                case 2:{
+                    if(ASCII_RAIDYNAS[j] == pirmas[i]) {
+                        X = j;
+                    }
 
-             }
-         }
+                    if(ASCII_RAIDYNAS[j] == raktas[i]) {
+                        Y = j;
+                    }
+
+                    break;
+                }
+
+            }
+        }
 
         int finalinis = 0;
 
@@ -47,15 +59,17 @@ void sifruoti(const char pirmas[], const char antras[], char final[], const int 
         if(koduote == 1) {
             final[i] = LT_RAIDYNAS[finalinis];
         }
+        else if(koduote == 2) {
+            final[i] = ASCII_RAIDYNAS[finalinis];
+        }
     }
+
     cout << "Uþðifruotas þodis: ";
     for(int xz = 0; xz < masyvas_strlen; xz++)
         cout << final[xz];
 }
 
-void test2() {
-    cout << "Cia bus antra" << endl;
-}
+
 
 void test3() {
     cout << "Cia bus 3" << endl;
@@ -74,7 +88,7 @@ int main() {
 
         int pasirinkimas;
 
-        cout << "Pasirinkite: \n1 - Uþðifruoti tekstà\n2 - Deðifruoti tekstà \nIvedimas: ";
+        cout << "\nPasirinkite: \n1 - Uþðifruoti tekstà\n2 - Deðifruoti tekstà \nIvedimas: ";
 
         cin >> pasirinkimas;
 
@@ -85,28 +99,31 @@ int main() {
 
                 int vidinis;
                 cin >> vidinis;
-                if (vidinis == 1) {
+                if ((vidinis == 1) || (vidinis == 2)) {
 
-                    char pirmas[30] = {0};
-                    char raktas[30] = {0};
-                    char finalinis[30] = {0};
+                    char pirmas[50] = {0};
+                    char raktas[50] = {0};
+                    char finalinis[50] = {0};
 
 
                     cout << "Iveskite teksta:\n ÁVEDIMAS: ";
 
                     cin >> pirmas;
 
-                    for(int xy = 0; xy < strlen(pirmas); xy++)
-                        pirmas[xy] = toupper(pirmas[xy]); // didziosios raides
+
+                    if (vidinis != 2) {
+                        for(int xy = 0; xy < strlen(pirmas); xy++)
+                            pirmas[xy] = toupper(pirmas[xy]); // didziosios raides
+                    }
 
                     cout << "Iveskite rakta:\nÁVEDIMAS: ";
 
                     cin >> raktas;
 
-                    for(int zx = 0; zx < strlen(raktas); zx++)
-                        raktas[zx] = toupper(raktas[zx]);
-
-                    int n = sizeof(LT_RAIDYNAS) / sizeof(LT_RAIDYNAS[0]);
+                    if (vidinis != 2) {
+                        for(int zx = 0; zx < strlen(raktas); zx++)
+                            raktas[zx] = toupper(raktas[zx]);
+                    }
 
                     if(strlen(raktas) < strlen(pirmas)){ // jei raktas trumpestis uz tekstas
                         int x = 0;
@@ -120,15 +137,18 @@ int main() {
                                 x++;
                             }
                         }
-                    } // Pvþ Þodis LABAS, RA
+                    }
 
-                    sifruoti(pirmas, raktas, finalinis, n, strlen(pirmas), 1);
-
-
-                }
-                else if(vidinis == 2) {
-                    test2();
-                    break;
+                    if(vidinis == 1) {
+                        int n = sizeof(LT_RAIDYNAS) / sizeof(LT_RAIDYNAS[0]);
+                        sifruoti(pirmas, raktas, finalinis, n, strlen(pirmas), 1);
+                        break;
+                    }
+                    else if (vidinis == 2) {
+                        int n = sizeof(ASCII_RAIDYNAS) / sizeof(ASCII_RAIDYNAS[0]);
+                        sifruoti(pirmas, raktas, finalinis, n, strlen(pirmas), 2);
+                        break;
+                    }
                 }
                 else {
                     return 0;
